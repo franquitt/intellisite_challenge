@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  node_red:
+    container_name: challenge_node_red
+    build: node-red
+    volumes:
+      - ./node-red/volume:/data
+    ports:
+      - "1880:1880"
+
