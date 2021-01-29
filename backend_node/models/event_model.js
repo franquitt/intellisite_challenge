@@ -28,8 +28,6 @@ const schema = new mongoose.Schema(
 			required: true,
 		},
 
-
-
 	},
 	{
 		strict: true,

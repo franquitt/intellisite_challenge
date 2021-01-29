@@ -6,18 +6,22 @@ const schema = new mongoose.Schema(
 			type: Number,
 			required: true,
 		},
+
 		x: {
 			type: Number,
 			required: true,
 		},
+
 		h: {
 			type: Number,
 			required: true,
 		},
+
 		w: {
 			type: Number,
 			required: true,
 		},
+
 		timestamp: {
 			type: Date,
 			required: true,

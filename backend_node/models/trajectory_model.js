@@ -7,6 +7,7 @@ const CoordinateSchema = require("./coordinate_model").schema
 const schema = new mongoose.Schema(
 	{
 		checkpoints: [CheckpointSchema],
+
 		coordinates: [CoordinateSchema]
 
 	},

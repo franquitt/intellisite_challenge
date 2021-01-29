@@ -8,26 +8,32 @@ const anomalySchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+
 		module_id: {
 			type: String,
 			required: true,
 		},
+
 		camera_uuid: {
 			type: String,
 			required: true,
 		},
+
 		module: {
 			type: String,
 			required: true,
 		},
+
 		timestamp: {
 			type: Date,
 			required: true,
 		},
+
 		json_version: {
 			type: String,
 			required: true,
 		},
+
 		events: [EventSchema]
 	},
 	{

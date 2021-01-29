@@ -7,19 +7,23 @@ const schema = new mongoose.Schema(
 				type: String,
 				required: false,
 			},
+
 			congestion_uuid: {
 				type: String,
 				required: false,
 			}
 		},
+
 		type: {
 			type: String,
 			required: true,
 		},
+
 		name: {
 			type: String,
 			required: true,
 		},
+
 		timestamp: {
 			type: Date,
 			required: true,
