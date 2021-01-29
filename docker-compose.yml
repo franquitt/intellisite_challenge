@@ -1,10 +1,26 @@
 version: '3.3'
 services:
-  node_red:
+  challenge_node_red:
     container_name: challenge_node_red
     build: node-red
     volumes:
       - ./node-red/volume:/data
     ports:
       - "1880:1880"
+
+  challenge_mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+
+  challenge_backend:
+    container_name: challenge_backend
+    build: backend_node
+    volumes:
+      - ./requirements/resources/events.json:/uploads/events.json
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URL: 'mongodb://root:rootpassword@challenge_mongodb:27017/admin'
 

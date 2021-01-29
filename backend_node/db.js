@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://eladmin:losPollos489@localhost:27017/denunciaapp', {
+const default_url = 'mongodb://eladmin:losPollos489@localhost:27017/denunciaapp';
+mongoose.connect(process.env.MONGO_URL ? process.env.MONGO_URL : default_url, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 	},
