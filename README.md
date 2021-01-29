@@ -24,7 +24,7 @@ Start and build your docker compose
 docker-compose up --build -d
 ```
 Now use the CLI to populate the database with your file
-```
+```bash
 docker exec -it challenge_backend cli --help
 docker exec -it challenge_backend cli file_upload --file /uploads/events.json
 ```
