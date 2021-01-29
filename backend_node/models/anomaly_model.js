@@ -1,5 +1,8 @@
 const mongoose = require("../db");
-const schema = new mongoose.Schema(
+
+const EventSchema = require("./event_model").schema
+
+const anomalySchema = new mongoose.Schema(
 	{
 		module_version: {
 			type: String,
@@ -25,6 +28,7 @@ const schema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		events: [EventSchema]
 	},
 	{
 		strict: true,
@@ -32,4 +36,4 @@ const schema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model("Anomaly", schema);
+module.exports = mongoose.model("Anomaly", anomalySchema);
