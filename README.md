@@ -3,7 +3,7 @@
 This is a project that solves the challenge of intellisite for the fullstack position.
 It consists of:
 
-- A container with node and express as a backend
+- A container with node and express as a HTTP API and CLI
 - A container with node-red as a frontend
 - A container with MongoDB
 - Docker and docker-compose
