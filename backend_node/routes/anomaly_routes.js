@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const anomalyController = require("../controller/anomaly_controller");
-
+const auth = require("../middleware/auth");
 /**
  * @swagger
  *
@@ -52,5 +52,27 @@ router.get("/", anomalyController.findAll);
  *
  */
 router.get("/csvfile", anomalyController.csvfile);
+
+
+/**
+ * @swagger
+ *
+ * /anomalies/removeAll:
+ *   delete:
+ *     tags:
+ *       - "anomalies"
+ *     summary: Removes all anomalies in the database. You must be logged in.
+ *     produces:
+ *       - application/json
+ *     security:
+ *       - JWTAuth: []
+ *     responses:
+ *       200:
+ *         description: OK
+ *         schema:
+ *           type: file
+ *
+ */
+router.delete("/removeAll", auth, anomalyController.removeAll);
 
 module.exports = router;

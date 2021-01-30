@@ -27,6 +27,15 @@ const options = {
 				url: "http://localhost:8000/api",
 			},
 		],
+		components: {
+			securitySchemes: {
+				JWTAuth: {
+					type: "apiKey",
+					in: "header",
+					name: "token"
+				}
+			}
+		},
 		tags: [{
 			name: "anomalies",
 			description: "Everything about the traffic anomalies"

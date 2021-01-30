@@ -3,7 +3,7 @@ const Parser = require('json2csv').Parser;
 const Anomaly = require("../models/anomaly_model");
 
 exports.findAll = (req, res) => {
-	let { page = 1, limit = 10 } = req.query;
+	let {page = 1, limit = 10} = req.query;
 	page = parseInt(page);
 	limit = parseInt(limit);
 	Anomaly.find().limit(limit)
@@ -106,14 +106,21 @@ exports.csvfile = async (req, res) => {
 
 			let csv_rows = [csvHeaders];
 
-			Object.keys(data_by_time).forEach(date_time=>{
+			Object.keys(data_by_time).forEach(date_time => {
 				data_by_time[date_time].camera = [...new Set(data_by_time[date_time].camera)];
 				data_by_time[date_time].camera = data_by_time[date_time].camera.join(", ")
-				const date = new Date(date_time+":00.000Z");
+				const date = new Date(date_time + ":00.000Z");
 
 				// convert all to arg time and add date time and day of the week
-				data_by_time[date_time].date = date.toLocaleDateString("es-AR", {year: 'numeric', month: '2-digit', day: '2-digit'});
-				data_by_time[date_time].hour = date.toLocaleDateString("es-AR", {hour: '2-digit', minute: '2-digit'}).split(" ")[1];
+				data_by_time[date_time].date = date.toLocaleDateString("es-AR", {
+					year: 'numeric',
+					month: '2-digit',
+					day: '2-digit'
+				});
+				data_by_time[date_time].hour = date.toLocaleDateString("es-AR", {
+					hour: '2-digit',
+					minute: '2-digit'
+				}).split(" ")[1];
 				data_by_time[date_time].day_week = date.getDay();
 
 				csv_rows.push(data_by_time[date_time]);
@@ -131,4 +138,16 @@ exports.csvfile = async (req, res) => {
 				message: err.message || "Error Occured",
 			});
 		});
+}
+
+exports.removeAll = async (req, res) => {
+	Anomaly.deleteMany().then(result => {
+		res.status(200).send({
+			message: "OK"
+		});
+	}).catch((err) => {
+		res.status(500).send({
+			message: err.message || "Error Occured",
+		});
+	});
 }

@@ -3,10 +3,13 @@
 This is a project that solves the challenge of intellisite for the fullstack position.
 It consists of:
 
-- A container with node and express as a HTTP API and CLI. Also this api has a swagger-ui endpoint 
-- A container with node-red as a frontend
-- A container with MongoDB
-- Docker and docker-compose
+* A container with node and express:
+  - HTTP API for anomalies and users
+  - CLI
+  - Swagger-ui endpoint
+* A container with node-red as a frontend
+* A container with MongoDB
+* Docker and docker-compose
 
 The description of the challenge is in the folder **requirements**.
 

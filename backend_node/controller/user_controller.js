@@ -57,8 +57,6 @@ exports.login = (req, res) => {
 		password: sha512(req.body.password),
 	})
 		.then((user) => {
-			console.log(user)
-			console.log(sha512(req.body.password))
 			if (!user)
 				return res.status(400).send({
 					message: "Username and password didnt match with any user",
