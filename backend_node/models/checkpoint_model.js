@@ -1,5 +1,28 @@
 const mongoose = require("../db");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Checkpoint:
+ *       type: object
+ *       properties:
+ *         checkpoint_name:
+ *           type: string
+ *
+ *         direction:
+ *           type: string
+ *
+ *         uuid:
+ *           type: string
+ *
+ *         timestamp:
+ *           type: date
+ *
+ *         checkpoint_type:
+ *           type: string
+ */
+
 const schema = new mongoose.Schema(
 	{
 		checkpoint_name: {

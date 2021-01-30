@@ -33,7 +33,15 @@ const options = {
 		}]
 
 	},
-	apis: ["./routes/anomaly_routes.js"],
+	apis: [
+		"./models/checkpoint_model.js",
+		"./models/coordinate_model.js",
+		"./models/trajectory_model.js",
+		"./models/alert_model.js",
+		"./models/event_model.js",
+		"./models/anomaly_model.js",
+		"./routes/anomaly_routes.js",
+	],
 };
 const specs = swaggerJsdoc(options);
 app.use(

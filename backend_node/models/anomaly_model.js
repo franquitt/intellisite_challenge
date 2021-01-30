@@ -1,6 +1,36 @@
 const mongoose = require("../db");
 
 const EventSchema = require("./event_model").schema
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Anomaly:
+ *       type: object
+ *       properties:
+ *         module_version:
+ *           type: string
+ *
+ *         module_id:
+ *           type: string
+ *
+ *         camera_uuid:
+ *           type: string
+ *
+ *         module:
+ *           type: string
+ *
+ *         timestamp:
+ *           type: date
+ *
+ *         json_version:
+ *           type: string
+ *
+ *         events:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Events'
+ */
 
 const anomalySchema = new mongoose.Schema(
 	{

@@ -1,5 +1,28 @@
 const mongoose = require("../db");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Coordinate:
+ *       type: object
+ *       properties:
+ *         y:
+ *           type: number
+ *
+ *         x:
+ *           type: number
+ *
+ *         h:
+ *           type: number
+ *
+ *         w:
+ *           type: number
+ *
+ *         timestamp:
+ *           type: date
+ */
+
 const schema = new mongoose.Schema(
 	{
 		y: {

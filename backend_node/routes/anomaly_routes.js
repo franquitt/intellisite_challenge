@@ -12,16 +12,24 @@ const anomalyController = require("../controller/anomaly_controller");
  *     summary: Returns a list of all the generated anomalies.
  *     produces:
  *       - application/json
+ *     parameters:
+ *       - name: "page"
+ *         in: "query"
+ *         description: "Actual page of pagination(default=1)"
+ *         required: false
+ *         type: number
+ *       - name: "limit"
+ *         in: "query"
+ *         description: "Results by pagination(default=10)"
+ *         required: false
+ *         type: number
  *     responses:
  *       200:
  *         description: OK
  *         schema:
- *           type: object
- *           properties:
- *             module:
- *               type: string
- *             module_id:
- *               type: string
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Anomaly'
  *
  */
 router.get("/", anomalyController.findAll);

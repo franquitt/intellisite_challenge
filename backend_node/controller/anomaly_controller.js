@@ -3,7 +3,11 @@ const Parser = require('json2csv').Parser;
 const Anomaly = require("../models/anomaly_model");
 
 exports.findAll = (req, res) => {
-	Anomaly.find()
+	let { page = 1, limit = 10 } = req.query;
+	page = parseInt(page);
+	limit = parseInt(limit);
+	Anomaly.find().limit(limit)
+		.skip((page - 1) * limit)
 		.then((anomalies) => {
 			res.status(200).send(anomalies);
 		})
