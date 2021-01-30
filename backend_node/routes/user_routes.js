@@ -19,7 +19,7 @@ const userController = require("../controller/user_controller");
  *              $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: OK
+ *         description: The JWT of the user. Expires in 2 hours
  *         schema:
  *           $ref: '#/components/schemas/User'
  *
