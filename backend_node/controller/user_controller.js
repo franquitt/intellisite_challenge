@@ -1,7 +1,17 @@
 const User = require("../models/user_model");
-const bcrypt = require("bcryptjs");
+const sha512 = require("js-sha512").sha512;
 const jwt = require("jsonwebtoken");
 const privateKey = process.env.JWT_KEY || "pepitoclavounclavito";
+
+function generateJwt(user) {
+	return jwt.sign({
+			id: user.id,
+			username: user.username
+		}, privateKey,
+		{
+			expiresIn: '2h'
+		});
+}
 
 exports.create = async (req, res) => {
 
@@ -12,7 +22,7 @@ exports.create = async (req, res) => {
 	}
 	const user = new User({
 		username: req.body.username,
-		password: bcrypt.hashSync(req.body.password, 10),
+		password: sha512(req.body.password),
 		email: req.body.email,
 	});
 	const exists = await User.findOne({
@@ -27,14 +37,7 @@ exports.create = async (req, res) => {
 	user
 		.save()
 		.then((data) => {
-			const token = jwt.sign({
-					id: data.id,
-					username: data.username
-				}, privateKey,
-				{
-					expiresIn: '2h'
-				});
-			res.send({ 'token': token});
+			res.send({'token': generateJwt(data)});
 		})
 		.catch((err) => {
 			res.status(500).send({
@@ -43,11 +46,25 @@ exports.create = async (req, res) => {
 		});
 };
 
-exports.findAll = (req, res) => {
-	User.find()
-		.sort({name: -1})
-		.then((users) => {
-			res.status(200).send(users);
+exports.login = (req, res) => {
+	if (!req.body.password || !req.body.username) {
+		return res.status(400).send({
+			message: "Required fields missing!",
+		});
+	}
+	User.findOne({
+		username: req.body.username,
+		password: sha512(req.body.password),
+	})
+		.then((user) => {
+			console.log(user)
+			console.log(sha512(req.body.password))
+			if (!user)
+				return res.status(400).send({
+					message: "Username and password didnt match with any user",
+				});
+
+			res.status(200).send({'token': generateJwt(user)});
 		})
 		.catch((err) => {
 			res.status(500).send({
