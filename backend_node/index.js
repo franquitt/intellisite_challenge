@@ -30,7 +30,11 @@ const options = {
 		tags: [{
 			name: "anomalies",
 			description: "Everything about the traffic anomalies"
-		}]
+		},
+			{
+				name: "users",
+				description: "Auth with users"
+			}]
 
 	},
 	apis: [
@@ -41,6 +45,9 @@ const options = {
 		"./models/event_model.js",
 		"./models/anomaly_model.js",
 		"./routes/anomaly_routes.js",
+
+		"./models/user_model.js",
+		"./routes/user_routes.js",
 	],
 };
 const specs = swaggerJsdoc(options);
@@ -55,9 +62,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 //app.use("/", router);
 app.use("/api/anomalies", require("./routes/anomaly_routes"));
+app.use("/api/users", require("./routes/user_routes"));
 
-app.get('/', (req, res) => {
-	res.json({"message": "Congratulations! you are working great!"});
-});
 app.listen(8000);
-console.log("Listening to PORT 8000");
+console.log("Ready! go to http://localhost:8000/api/docs");

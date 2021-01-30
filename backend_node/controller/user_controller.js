@@ -1,70 +1,57 @@
-const User = require("../models/anomaly_model");
+const User = require("../models/user_model");
 const bcrypt = require("bcryptjs");
-/**
- * this method is to create the user
- */
-exports.create = (req, res) => {
-	/**
-	 * validation request
-	 */
-	if (!req.body.email || !req.body.password || !req.body.name) {
+const jwt = require("jsonwebtoken");
+const privateKey = process.env.JWT_KEY || "pepitoclavounclavito";
+
+exports.create = async (req, res) => {
+
+	if (!req.body.email || !req.body.password || !req.body.username) {
 		return res.status(400).send({
-			message: "Required field can not be empty",
+			message: "Required fields missing!",
 		});
 	}
-	/**
-	 * Create a user
-	 */
 	const user = new User({
-		email: req.body.email,
+		username: req.body.username,
 		password: bcrypt.hashSync(req.body.password, 10),
-		name: req.body.name,
-		age: req.body.age,
-		gender: req.body.gender,
-		isActive: req.body.isActive,
-		userType: req.body.userType,
+		email: req.body.email,
 	});
-	/**
-	 * Save user to database
-	 */
+	const exists = await User.findOne({
+		username: req.body.username
+	}).limit(1);
+	if (exists) {
+		return res.status(400).send({
+			message: "Username already taken!",
+		});
+	}
+
 	user
 		.save()
 		.then((data) => {
-			res.send(data);
+			const token = jwt.sign({
+					id: data.id,
+					username: data.username
+				}, privateKey,
+				{
+					expiresIn: '2h'
+				});
+			res.send({ 'token': token});
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: err.message || "Some error occurred while creating the User.",
+				message: err.message || "Error while creating the User.",
 			});
 		});
 };
 
 exports.findAll = (req, res) => {
 	User.find()
-		.sort({ name: -1 })
+		.sort({name: -1})
 		.then((users) => {
 			res.status(200).send(users);
 		})
 		.catch((err) => {
 			res.status(500).send({
 				message: err.message || "Error Occured",
-			});
-		});
-};
-
-exports.delete = (req, res) => {
-	User.findByIdAndRemove(req.params.id)
-		.then((user) => {
-			if (!user) {
-				return res.status(404).send({
-					message: "User not found ",
-				});
-			}
-			res.send({ message: "User deleted successfully!" });
-		})
-		.catch((err) => {
-			return res.status(500).send({
-				message: "Could not delete user ",
 			});
 		});
 };

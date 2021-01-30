@@ -23,4 +23,5 @@ services:
       - "8000:8000"
     environment:
       MONGO_URL: 'mongodb://root:rootpassword@challenge_mongodb:27017/admin'
+      JWT_KEY: 'D5rN5Y2fBRG4ee4aRexr37nE5GeFEc9d'
 
