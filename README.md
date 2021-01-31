@@ -10,6 +10,8 @@ It consists of:
 * A container with node-red as a frontend
 * A container with MongoDB
 * Docker and docker-compose
+* A container with react optimized for production inside a nginx server
+
 
 The description of the challenge is in the folder **requirements**.
 
@@ -42,3 +44,4 @@ docker exec -it challenge_backend cli file_upload --file /uploads/events.json
 - Node-red UI: http://localhost:1880/ui/
 - Backend API: http://localhost:8000/api/anomalies
 - Swagger endpoint: http://localhost:8000/api/docs
+- React frontend: http://localhost:3000

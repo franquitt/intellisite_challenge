@@ -1,9 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser"),
 	swaggerJsdoc = require("swagger-jsdoc"),
-	swaggerUi = require("swagger-ui-express");
+	swaggerUi = require("swagger-ui-express"),
+	cors = require('cors');
 let app = express();
-
+app.use(cors());
 const options = {
 	definition: {
 		openapi: "3.0.0",
