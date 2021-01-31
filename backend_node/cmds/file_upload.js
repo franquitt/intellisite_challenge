@@ -29,7 +29,7 @@ module.exports = (args) => {
 
 			process.exit(1)
 		}).catch(error=>{
-			//thiw will rise for example if the json file is not formed as the anomalies schema
+			//this will rise for example if the json file is not formed as the anomalies schema
 			console.log("\n", error.message);
 			process.exit(1)
 		});
