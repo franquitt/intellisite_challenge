@@ -5,6 +5,7 @@ import AppBar from "../Shared/Components/AppBar";
 import SaveIcon from '@material-ui/icons/Save';
 import {useEffect, useState} from "react";
 import {get} from "../Shared/Helpers/HttpService";
+import { uuid4 } from 'uuidv4';
 
 const columns = [
 	{field: 'date', headerName: 'Date', width: 120},
@@ -15,12 +16,6 @@ const columns = [
 	{field: 'anomaly_names', headerName: 'Anomalies', width: 320},
 ];
 
-function uuidv4() {
-	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-		var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & (0x3 | 0x8));
-		return v.toString(16);
-	});
-}
 
 const PageHome = () => {
 	const [rows, setRows] = useState([]);
@@ -37,7 +32,7 @@ const PageHome = () => {
 
 
 			return {
-				id: uuidv4(),
+				id: uuid4(),
 				date: date_obj.toLocaleDateString("es-AR", {year: 'numeric', month: '2-digit', day: '2-digit'}),
 				hour: date_obj.toLocaleDateString("es-AR", {hour: '2-digit', minute: '2-digit'}).split(" ")[1],
 				day_week: date_obj.getDay(),
