@@ -1,7 +1,7 @@
 const User = require("../models/user_model");
 const sha512 = require("js-sha512").sha512;
 const jwt = require("jsonwebtoken");
-const privateKey = process.env.JWT_KEY || "pepitoclavounclavito";
+const privateKey = process.env.JWT_KEY || "sbVeTJRBjEvpHd8QXHDWzhGYauSq5C2g";
 
 function generateJwt(user) {
 	return jwt.sign({

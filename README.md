@@ -16,7 +16,7 @@ It consists of:
 The description of the challenge is in the folder **requirements**.
 
 ## Get started
-Edit the docker compose file at the root and mount your anomaly json file
+Edit the docker compose file at **/docker/dev** and mount your anomaly json file
 in the backend container.
 By default, the *events.json* file of the activity is already mounted. 
 Example:
@@ -28,7 +28,7 @@ challenge_backend:
     - ./requirements/resources/events.json:/uploads/events.json
 ```
 
-Start and build your docker compose
+Go to the folder **docker/dev** to start and build your docker compose
 ```bash
 docker-compose up --build -d
 ```

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const privateKey = process.env.JWT_KEY || "pepitoclavounclavito";
+const privateKey = process.env.JWT_KEY || "sbVeTJRBjEvpHd8QXHDWzhGYauSq5C2g";
 
 module.exports = function (req, res, next) {
 	const token = req.header("token");
