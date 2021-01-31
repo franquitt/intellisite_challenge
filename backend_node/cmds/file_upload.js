@@ -1,15 +1,7 @@
 const getTimeDiff = (date1, date2) => {
 	const diff = date2.getTime() - date1.getTime();
-
-	let msec = diff;
-	var hh = Math.floor(msec / 1000 / 60 / 60);
-	msec -= hh * 1000 * 60 * 60;
-	const mm = Math.floor(msec / 1000 / 60);
-	msec -= mm * 1000 * 60;
-	const ss = Math.floor(msec / 1000);
-	msec -= ss * 1000;
-	return hh + " hs - " + mm + " min - " + ss + " seg";
-}
+	return new Date(diff).toISOString().slice(11,19);
+};
 
 module.exports = (args) => {
 	if (!args.file) {
@@ -23,16 +15,30 @@ module.exports = (args) => {
 	}
 	console.log("\nProcessing file...");
 	const dateStart = new Date();
-	const file = require(args.file);
-	const Anomaly = require("../models/anomaly_model");
+	try {
+		const file = require(args.file);
+		const Anomaly = require("../models/anomaly_model");
 
-	Anomaly.insertMany(file).then(function(result, err) {
-		if(err)
-			console.log(err)
-		else{
-			const dateEnd = new Date();
-			console.log("Successfully Upload JSON in "+getTimeDiff(dateStart, dateEnd));
+		Anomaly.insertMany(file).then(function (result, err) {
+			if (err)
+				console.log(err);
+			else {
+				const dateEnd = new Date();
+				console.log("Successfully Upload JSON in " + getTimeDiff(dateStart, dateEnd));
+			}
+
+			process.exit(1)
+		}).catch(error=>{
+			//thiw will rise for example if the json file is not formed as the anomalies schema
+			console.log("\n", error.message);
+			process.exit(1)
+		});
+	}catch (error) {
+		if (error instanceof SyntaxError) {
+			console.log("\nThis is not a valid JSON file...");
+		}else{
+			console.log("\nAn error ocurred processing file...");
 		}
 		process.exit(1)
-	})
+	}
 }
