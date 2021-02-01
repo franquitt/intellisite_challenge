@@ -5,7 +5,7 @@ import AppBar from "../Shared/Components/AppBar";
 import SaveIcon from '@material-ui/icons/Save';
 import {useEffect, useState} from "react";
 import {get} from "../Shared/Helpers/HttpService";
-import { uuid4 } from 'uuidv4';
+import { uuid } from 'uuidv4';
 
 const columns = [
 	{field: 'date', headerName: 'Date', width: 120},
@@ -32,7 +32,7 @@ const PageHome = () => {
 
 
 			return {
-				id: uuid4(),
+				id: uuid(),
 				date: date_obj.toLocaleDateString("es-AR", {year: 'numeric', month: '2-digit', day: '2-digit'}),
 				hour: date_obj.toLocaleDateString("es-AR", {hour: '2-digit', minute: '2-digit'}).split(" ")[1],
 				day_week: date_obj.getDay(),
